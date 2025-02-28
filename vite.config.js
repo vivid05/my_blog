@@ -27,7 +27,7 @@ function markdownPlugin() {
 
 // https://vite.dev/config/
 export default defineConfig({
-  base: '/blog/', // 设置基础路径为仓库名
+  base: '/my_blog/', // 设置基础路径为仓库名
   plugins: [
     vue(),
     markdownPlugin(),
