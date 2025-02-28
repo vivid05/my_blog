@@ -1,6 +1,5 @@
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
-import fs from 'fs'
 import matter from 'gray-matter'
 import { nodePolyfills } from 'vite-plugin-node-polyfills'
 
@@ -31,13 +30,32 @@ export default defineConfig({
   plugins: [
     vue(),
     markdownPlugin(),
-    nodePolyfills()
+    nodePolyfills({
+      protocolImports: true,
+      globals: {
+        Buffer: true,
+        global: true,
+        process: true
+      }
+    })
   ],
   assetsInclude: ['**/*.md'],
   server: {
     fs: {
       // 允许访问项目根目录以外的文件
       allow: ['..']
+    }
+  },
+  build: {
+    outDir: 'docs', // 将构建输出目录设置为 docs
+    emptyOutDir: true, // 构建前清空输出目录
+    assetsDir: 'assets', // 静态资源目录
+    rollupOptions: {
+      output: {
+        chunkFileNames: 'assets/js/[name]-[hash].js',
+        entryFileNames: 'assets/js/[name]-[hash].js',
+        assetFileNames: 'assets/[ext]/[name]-[hash].[ext]'
+      }
     }
   }
 })
