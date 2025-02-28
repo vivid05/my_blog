@@ -27,6 +27,7 @@ function markdownPlugin() {
 
 // https://vite.dev/config/
 export default defineConfig({
+  base: '/blog/', // 设置基础路径为仓库名
   plugins: [
     vue(),
     markdownPlugin(),
@@ -49,12 +50,20 @@ export default defineConfig({
   build: {
     outDir: 'docs', // 将构建输出目录设置为 docs
     emptyOutDir: true, // 构建前清空输出目录
-    assetsDir: 'assets', // 静态资源目录
+    assetsDir: '', // 不再使用 assets 子目录
     rollupOptions: {
       output: {
-        chunkFileNames: 'assets/js/[name]-[hash].js',
-        entryFileNames: 'assets/js/[name]-[hash].js',
-        assetFileNames: 'assets/[ext]/[name]-[hash].[ext]'
+        chunkFileNames: 'js/[name]-[hash].js',
+        entryFileNames: 'js/[name]-[hash].js',
+        assetFileNames: ({ name }) => {
+          if (/\.(gif|jpe?g|png|svg)$/.test(name ?? '')) {
+            return 'img/[name]-[hash][extname]'
+          }
+          if (/\.css$/.test(name ?? '')) {
+            return 'css/[name]-[hash][extname]'
+          }
+          return '[ext]/[name]-[hash][extname]'
+        }
       }
     }
   }
