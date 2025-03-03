@@ -82,7 +82,7 @@ onMounted(async () => {
         返回
       </button>
 
-      <MarkdownRenderer :filePath="`/src/content/articles/${id}.md`" />
+      <MarkdownRenderer :filePath="`/my_blog/src/content/articles/${id}.md`" />
 
       <div class="related-articles" ref="relatedArticles" v-if="relatedArticles.length">
         <h3 class="related-title">相关文章</h3>

@@ -51,14 +51,25 @@ const skillsMotion = useMotion(skillsSection, {
   }
 })
 
+const profileDescription = ref(`你好！我是一名深爱前端开发的工程师，拥有5年的行业经验，专注于打造用户友好、性能卓越的网站和应用程序。我对技术的热情不仅体现在日常工作中，更驱使我不断学习和掌握前沿技术，并将它们巧妙融入项目，显著提升用户体验和网站效率。
+
+在我的职业生涯中，我参与了多个具有挑战性的项目，涵盖从设计直观的响应式布局到优化网站加载速度等多个方面。我熟练掌握HTML、CSS、JavaScript等核心技术，并对Vue框架有着深入理解和丰富实践。例如，我曾主导一个复杂的单页应用（SPA）开发，通过优化代码结构和资源加载策略，成功将页面加载时间缩短了30%，为用户带来了更流畅的交互体验。
+
+我坚信技术永无止境，因此始终保持学习的姿态。紧跟最新的技术趋势，并通过阅读和实践探索如WebAssembly和Progressive Web Apps（PWA）等新兴技术。这些努力让我能够在项目中不断创新，为团队和用户创造更多价值。
+
+除了 coding，我还热衷于将所学所得与社区分享。我定期在个人技术博客上发布文章，内容涵盖前端开发的方方面面——从基础技巧到高级应用，从项目心得到行业洞察。
+
+总的来说，我是一名充满激情且不断进取的前端工程师，擅长通过技术创新提升产品价值，同时乐于分享知识、回馈社区。如果你对前端开发有任何有趣的想法，欢迎和我一起探讨！`)
+
 onMounted(() => {
   // 技能条动画
   const skillBars = document.querySelectorAll('.skill-progress-bar')
-  gsap.fromTo(skillBars, 
+  gsap.fromTo(
+    skillBars,
     { width: 0 },
-    { 
+    {
       width: 'var(--progress)',
-      duration: 1.5, 
+      duration: 1.5,
       ease: 'power2.out',
       stagger: 0.2,
       scrollTrigger: {
@@ -73,19 +84,18 @@ onMounted(() => {
 <template>
   <div class="about-page">
     <div class="page-header">
-      <h1 ref="pageTitle" class="page-title">关于我</h1>
-      <p class="page-subtitle">前端开发工程师 & UI设计爱好者</p>
+      <h1 ref="pageTitle" class="page-title">吴伟伟</h1>
+      <p class="page-subtitle">前端开发工程师</p>
     </div>
 
     <div class="about-container" ref="aboutContent">
       <div class="profile-section">
         <div class="profile-image">
-          <img src="https://picsum.photos/id/1012/300/300" alt="个人照片">
+          <img src="https://picsum.photos/id/1012/300/300" alt="个人照片" />
         </div>
         <div class="profile-info">
           <h2>个人简介</h2>
-          <p>你好！我是一名热爱前端开发的工程师，拥有5年的行业经验。我专注于创建用户友好、性能优异的网站和应用程序。</p>
-          <p>我热衷于学习新技术，并将它们应用到实际项目中。在空闲时间，我喜欢写技术博客，分享我的经验和见解。</p>
+          <p>{{ profileDescription }}</p>
           <div class="social-links">
             <a href="#" class="social-link">GitHub</a>
             <a href="#" class="social-link">LinkedIn</a>
@@ -106,7 +116,7 @@ onMounted(() => {
               <div class="skill-progress-bar" style="--progress: 95%"></div>
             </div>
           </div>
-          
+
           <div class="skill-item">
             <div class="skill-info">
               <span class="skill-name">JavaScript</span>
@@ -116,7 +126,7 @@ onMounted(() => {
               <div class="skill-progress-bar" style="--progress: 90%"></div>
             </div>
           </div>
-          
+
           <div class="skill-item">
             <div class="skill-info">
               <span class="skill-name">Vue.js</span>
@@ -126,7 +136,7 @@ onMounted(() => {
               <div class="skill-progress-bar" style="--progress: 85%"></div>
             </div>
           </div>
-          
+
           <div class="skill-item">
             <div class="skill-info">
               <span class="skill-name">React</span>
@@ -136,7 +146,7 @@ onMounted(() => {
               <div class="skill-progress-bar" style="--progress: 80%"></div>
             </div>
           </div>
-          
+
           <div class="skill-item">
             <div class="skill-info">
               <span class="skill-name">Node.js</span>
@@ -161,7 +171,7 @@ onMounted(() => {
               <p>负责公司核心产品的前端架构设计和开发，优化用户体验和页面性能，指导初级开发人员。</p>
             </div>
           </div>
-          
+
           <div class="timeline-item">
             <div class="timeline-dot"></div>
             <div class="timeline-content">
@@ -171,7 +181,7 @@ onMounted(() => {
               <p>参与多个Web应用项目的开发，负责实现响应式设计和交互功能，解决浏览器兼容性问题。</p>
             </div>
           </div>
-          
+
           <div class="timeline-item">
             <div class="timeline-dot"></div>
             <div class="timeline-content">
@@ -232,7 +242,9 @@ onMounted(() => {
   object-fit: cover;
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
   border: 5px solid white;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
 }
 
 .profile-image img:hover {
@@ -251,6 +263,7 @@ onMounted(() => {
   line-height: 1.6;
   color: #555;
   margin-bottom: 1rem;
+  white-space: pre-line;
 }
 
 .social-links {
@@ -266,7 +279,9 @@ onMounted(() => {
   color: white;
   text-decoration: none;
   font-weight: 600;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
 }
 
 .social-link:hover {
@@ -390,11 +405,11 @@ onMounted(() => {
     flex-direction: column;
     text-align: center;
   }
-  
+
   .social-links {
     justify-content: center;
   }
-  
+
   .page-title {
     font-size: 2.2rem;
   }

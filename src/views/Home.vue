@@ -29,6 +29,48 @@ const posts = ref([
     excerpt: 'Vite是一个现代前端构建工具，相比传统工具有哪些优势？本文将为你详细解析...',
     date: '2023-08-10',
     cover: 'https://picsum.photos/id/3/800/450'
+  },
+  {
+    id: 4,
+    title: 'Vue3的Composition API',
+    excerpt: 'Vue3的Composition API提供了更灵活的代码组织方式，本文将介绍如何开始使用它...',
+    date: '2023-06-15',
+    cover: 'https://picsum.photos/id/4/800/450'
+  },
+  {
+    id: 5,
+    title: 'Vue3的Composition API',
+    excerpt: 'Vue3的Composition API提供了更灵活的代码组织方式，本文将介绍如何开始使用它...',
+    date: '2023-06-15',
+    cover: 'https://picsum.photos/id/4/800/450'
+  },
+  {
+    id: 6,
+    title: 'Vue3的Composition API',
+    excerpt: 'Vue3的Composition API提供了更灵活的代码组织方式，本文将介绍如何开始使用它...',
+    date: '2023-06-15',
+    cover: 'https://picsum.photos/id/4/800/450'
+  },
+  {
+    id: 7,
+    title: 'Vue3的Composition API',
+    excerpt: 'Vue3的Composition API提供了更灵活的代码组织方式，本文将介绍如何开始使用它...',
+    date: '2023-06-15',
+    cover: 'https://picsum.photos/id/4/800/450'
+  },
+  {
+    id: 8,
+    title: 'Vue3的Composition API',
+    excerpt: 'Vue3的Composition API提供了更灵活的代码组织方式，本文将介绍如何开始使用它...',
+    date: '2023-06-15',
+    cover: 'https://picsum.photos/id/4/800/450'
+  },
+  {
+    id: 9,
+    title: 'Vue3的Composition API',
+    excerpt: 'Vue3的Composition API提供了更灵活的代码组织方式，本文将介绍如何开始使用它...',
+    date: '2023-06-15',
+    cover: 'https://picsum.photos/id/4/800/450'
   }
 ])
 
@@ -87,7 +129,6 @@ onMounted(() => {
         toggleActions: 'play none none none'
       },
       opacity: 0,
-      y: 50,
       duration: 0.8,
       delay: index * 0.2
     })
@@ -99,7 +140,7 @@ onMounted(() => {
   <div class="home">
     <section class="hero">
       <div class="hero-content">
-        <h1 ref="heroTitle" class="hero-title">我的个人博客</h1>
+        <h1 ref="heroTitle" class="hero-title">热爱 向往</h1>
         <p ref="heroSubtitle" class="hero-subtitle">分享前端开发的心得与体会</p>
         <div class="hero-actions">
           <router-link to="/articles" class="btn primary">浏览文章</router-link>
@@ -143,7 +184,6 @@ onMounted(() => {
   align-items: center;
   justify-content: center;
   text-align: center;
-  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
   color: white;
   position: relative;
   overflow: hidden;
@@ -156,7 +196,7 @@ onMounted(() => {
   left: 0;
   width: 100%;
   height: 100%;
-  background: url('https://picsum.photos/id/1035/1920/1080') center/cover no-repeat;
+  background: url('../assets/hero.jpg') center/cover no-repeat;
   animation: pulse 15s infinite alternate;
 }
 
@@ -180,10 +220,11 @@ onMounted(() => {
   font-size: 4rem;
   margin-bottom: 1rem;
   font-weight: 700;
+  color: #ffffff !important;
+  background: unset !important;
   text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
-  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+  -webkit-background-clip: unset !important;
+  -webkit-text-fill-color: unset !important;
 }
 
 .hero-subtitle {
@@ -191,6 +232,7 @@ onMounted(() => {
   margin-bottom: 2rem;
   font-weight: 300;
   text-shadow: 0 1px 5px rgba(0, 0, 0, 0.2);
+  color: #6a0dad !important;
 }
 
 .hero-actions {

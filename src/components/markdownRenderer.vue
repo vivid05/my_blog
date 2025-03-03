@@ -66,6 +66,7 @@ export default {
     const renderMarkdown = async () => {
       try {
         let markdownContent = props.content
+        let _renderedContent = ''
 
         // 如果提供了文件路径，则获取文件内容
         if (props.filePath && !props.content) {
@@ -74,14 +75,14 @@ export default {
             throw new Error(`Failed to load markdown file: ${props.filePath}`)
           }
           markdownContent = await response.text()
-          const { data } = matter(markdownContent)
+          const { data, content } = matter(markdownContent)
           article.value = { ...data }
-          console.log(123, article.value)
+          _renderedContent = content
         }
 
         // 使用marked转换Markdown为HTML
-        if (markdownContent) {
-          renderedContent.value = marked(markdownContent)
+        if (_renderedContent) {
+          renderedContent.value = marked(_renderedContent)
 
           // 确保代码高亮应用于新渲染的内容
           // 注意：这一步在客户端渲染时很有用，确保动态内容也能高亮
@@ -277,6 +278,7 @@ export default {
   gap: 1.5rem;
   font-size: 0.9rem;
   color: var(--light-text);
+  align-items: center;
 }
 
 .article-category {

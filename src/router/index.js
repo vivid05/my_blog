@@ -35,7 +35,7 @@ const router = createRouter({
       path: '/:pathMatch(.*)*',
       name: '/',
       component: Home,
-      meta: { transition: 'slide-left' }
+      meta: { transition: 'fade' }
     }
   ],
   scrollBehavior(to, from, savedPosition) {

@@ -65,14 +65,7 @@ const articles = ref([
 ])
 
 // 分类列表
-const categories = ref([
-  '全部',
-  '前端开发',
-  'JavaScript',
-  'CSS',
-  '动画效果',
-  '工具'
-])
+const categories = ref(['全部', '前端开发', 'JavaScript', 'CSS', '动画效果', '工具'])
 
 const selectedCategory = ref('全部')
 
@@ -116,12 +109,13 @@ const listMotion = useMotion(articlesList, {
 onMounted(() => {
   // 文章卡片动画
   const cards = document.querySelectorAll('.article-card')
-  gsap.fromTo(cards, 
+  gsap.fromTo(
+    cards,
     { opacity: 0, y: 30 },
-    { 
-      opacity: 1, 
-      y: 0, 
-      duration: 0.6, 
+    {
+      opacity: 1,
+      y: 0,
+      duration: 0.6,
       stagger: 0.15,
       ease: 'power2.out'
     }
@@ -137,25 +131,15 @@ onMounted(() => {
     </div>
 
     <div class="categories-filter">
-      <button 
-        v-for="category in categories" 
-        :key="category"
-        :class="['category-btn', { active: selectedCategory === category }]"
-        @click="selectedCategory = category"
-      >
+      <button v-for="category in categories" :key="category" :class="['category-btn', { active: selectedCategory === category }]" @click="selectedCategory = category">
         {{ category }}
       </button>
     </div>
 
     <div class="articles-container" ref="articlesList">
-      <router-link 
-        v-for="article in filteredArticles" 
-        :key="article.id" 
-        :to="`/articles/${article.id}`" 
-        class="article-card"
-      >
+      <router-link v-for="article in filteredArticles" :key="article.id" :to="`/articles/${article.id}`" class="article-card">
         <div class="article-image">
-          <img :src="article.cover" :alt="article.title">
+          <img :src="article.cover" :alt="article.title" />
           <div class="article-category">{{ article.category }}</div>
         </div>
         <div class="article-content">
@@ -238,7 +222,9 @@ onMounted(() => {
   border-radius: 12px;
   overflow: hidden;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
   text-decoration: none;
   color: inherit;
   background-color: white;
@@ -321,15 +307,15 @@ onMounted(() => {
   .articles-container {
     grid-template-columns: 1fr;
   }
-  
+
   .page-title {
     font-size: 2.2rem;
   }
-  
+
   .categories-filter {
     gap: 0.5rem;
   }
-  
+
   .category-btn {
     padding: 0.4rem 1rem;
     font-size: 0.9rem;

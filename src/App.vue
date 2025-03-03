@@ -22,15 +22,15 @@ function closeMobileMenu() {
     <header class="header">
       <div class="container">
         <div class="header-content">
-          <router-link to="/" class="logo">个人博客</router-link>
-          
+          <router-link to="/" class="logo">VIVI小屋</router-link>
+
           <!-- 桌面端导航 -->
           <nav class="desktop-nav">
             <router-link to="/" :class="{ active: currentRouteName === 'Home' }">首页</router-link>
             <router-link to="/articles" :class="{ active: currentRouteName === 'Articles' }">文章</router-link>
             <router-link to="/about" :class="{ active: currentRouteName === 'About' }">关于</router-link>
           </nav>
-          
+
           <!-- 移动端菜单按钮 -->
           <button class="mobile-menu-button" @click="toggleMobileMenu">
             <span></span>
@@ -40,7 +40,7 @@ function closeMobileMenu() {
         </div>
       </div>
     </header>
-    
+
     <!-- 移动端菜单 -->
     <div class="mobile-menu" :class="{ open: isMobileMenuOpen }">
       <nav>
@@ -49,22 +49,22 @@ function closeMobileMenu() {
         <router-link to="/about" @click="closeMobileMenu">关于</router-link>
       </nav>
     </div>
-    
-    <main>
+
+    <main class="main-container">
       <router-view v-slot="{ Component }">
         <transition :name="route.meta.transition || 'fade'" mode="out-in">
           <component :is="Component" />
         </transition>
       </router-view>
     </main>
-    
+
     <footer class="footer">
       <div class="container">
         <p>&copy; {{ new Date().getFullYear() }} 个人博客. 保留所有权利.</p>
-        <div class="footer-links">
+        <!-- <div class="footer-links">
           <a href="#">隐私政策</a>
           <a href="#">联系我</a>
-        </div>
+        </div> -->
       </div>
     </footer>
   </div>
@@ -91,7 +91,18 @@ function closeMobileMenu() {
 }
 
 body {
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-family:
+    'Inter',
+    -apple-system,
+    BlinkMacSystemFont,
+    'Segoe UI',
+    Roboto,
+    Oxygen,
+    Ubuntu,
+    Cantarell,
+    'Open Sans',
+    'Helvetica Neue',
+    sans-serif;
   color: var(--text-color);
   background-color: var(--bg-color);
   line-height: 1.6;
@@ -104,7 +115,7 @@ body {
   width: 100%;
   max-width: 1280px;
   margin: 0 auto;
-  padding: 0 2rem;
+  /* padding: 0 2rem; */
 }
 
 /* 应用容器 */
@@ -120,11 +131,12 @@ body {
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
-  position: sticky;
+  position: fixed;
+  left: 0;
   top: 0;
   z-index: 100;
   height: var(--header-height);
-  width: 100%;
+  width: 100vw;
   transition: transform var(--transition-speed) var(--transition-ease);
 }
 
@@ -159,6 +171,10 @@ body {
   transform: scale(1.05);
 }
 
+.main-container {
+  padding-top: calc(var(--header-height) + 32px);
+}
+
 /* 桌面导航 */
 .desktop-nav {
   display: flex;
@@ -182,8 +198,9 @@ body {
   width: 0;
   height: 2px;
   background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
-  transition: width var(--transition-speed) var(--transition-ease),
-              left var(--transition-speed) var(--transition-ease);
+  transition:
+    width var(--transition-speed) var(--transition-ease),
+    left var(--transition-speed) var(--transition-ease);
   transform-origin: center;
 }
 
@@ -210,8 +227,9 @@ body {
   height: 2px;
   width: 100%;
   background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
-  transition: transform var(--transition-speed) var(--transition-ease),
-              opacity var(--transition-speed) var(--transition-ease);
+  transition:
+    transform var(--transition-speed) var(--transition-ease),
+    opacity var(--transition-speed) var(--transition-ease);
 }
 
 .mobile-menu-button.open span:first-child {
@@ -250,8 +268,9 @@ body {
 .mobile-menu nav a {
   transform: translateY(-20px);
   opacity: 0;
-  transition: transform var(--transition-speed) var(--transition-ease),
-              opacity var(--transition-speed) var(--transition-ease);
+  transition:
+    transform var(--transition-speed) var(--transition-ease),
+    opacity var(--transition-speed) var(--transition-ease);
 }
 
 .mobile-menu.open nav a {
@@ -259,9 +278,15 @@ body {
   opacity: 1;
 }
 
-.mobile-menu.open nav a:nth-child(1) { transition-delay: 0.1s; }
-.mobile-menu.open nav a:nth-child(2) { transition-delay: 0.2s; }
-.mobile-menu.open nav a:nth-child(3) { transition-delay: 0.3s; }
+.mobile-menu.open nav a:nth-child(1) {
+  transition-delay: 0.1s;
+}
+.mobile-menu.open nav a:nth-child(2) {
+  transition-delay: 0.2s;
+}
+.mobile-menu.open nav a:nth-child(3) {
+  transition-delay: 0.3s;
+}
 
 /* 主内容区 */
 main {
@@ -297,12 +322,7 @@ main {
   left: 0;
   right: 0;
   height: 1px;
-  background: linear-gradient(90deg, 
-    transparent,
-    var(--primary-color),
-    var(--secondary-color),
-    transparent
-  );
+  background: linear-gradient(90deg, transparent, var(--primary-color), var(--secondary-color), transparent);
 }
 
 .footer .container {
@@ -331,8 +351,9 @@ main {
 /* 页面过渡动画 */
 .fade-enter-active,
 .fade-leave-active {
-  transition: opacity var(--transition-speed) var(--transition-ease),
-              transform var(--transition-speed) var(--transition-ease);
+  transition:
+    opacity var(--transition-speed) var(--transition-ease),
+    transform var(--transition-speed) var(--transition-ease);
 }
 
 .fade-enter-from,
@@ -369,15 +390,15 @@ main {
   .desktop-nav {
     display: none;
   }
-  
+
   .mobile-menu-button {
     display: flex;
   }
-  
+
   .header {
     padding: 0 1rem;
   }
-  
+
   main {
     padding: 1rem;
   }
@@ -391,15 +412,15 @@ main {
     --bg-color: #1a1a1a;
     --card-bg: #2a2a2a;
   }
-  
+
   .header {
     background-color: rgba(26, 26, 26, 0.8);
   }
-  
+
   .mobile-menu {
     background-color: rgba(26, 26, 26, 0.98);
   }
-  
+
   .footer {
     background-color: #1a1a1a;
     border-top-color: rgba(255, 255, 255, 0.1);
