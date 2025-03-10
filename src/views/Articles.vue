@@ -1,80 +1,57 @@
 <script setup>
-import { ref, onMounted, computed } from 'vue'
+import { ref, onMounted, computed, watch, nextTick } from 'vue'
 import { useMotion } from '@vueuse/motion'
 import gsap from 'gsap'
+import { getCategories, getArticlesByCategory } from '../data/articles'
 
 const pageTitle = ref(null)
 const articlesList = ref(null)
 
-// 示例文章数据
-const articles = ref([
-  {
-    id: 1,
-    title: '开始使用Vue3的Composition API',
-    excerpt: 'Vue3的Composition API提供了更灵活的代码组织方式，本文将介绍如何开始使用它...',
-    date: '2023-06-15',
-    cover: 'https://picsum.photos/id/1/800/450',
-    category: '前端开发',
-    readTime: '5分钟'
-  },
-  {
-    id: 2,
-    title: '使用GSAP创建丝滑动画效果',
-    excerpt: 'GSAP是一个强大的JavaScript动画库，可以帮助你创建流畅的网页动画...',
-    date: '2023-07-22',
-    cover: 'https://picsum.photos/id/2/800/450',
-    category: '动画效果',
-    readTime: '7分钟'
-  },
-  {
-    id: 3,
-    title: 'Vite构建工具的优势',
-    excerpt: 'Vite是一个现代前端构建工具，相比传统工具有哪些优势？本文将为你详细解析...',
-    date: '2023-08-10',
-    cover: 'https://picsum.photos/id/3/800/450',
-    category: '工具',
-    readTime: '6分钟'
-  },
-  {
-    id: 4,
-    title: '响应式设计最佳实践',
-    excerpt: '如何确保你的网站在各种设备上都能完美展示？本文分享响应式设计的关键技巧...',
-    date: '2023-09-05',
-    cover: 'https://picsum.photos/id/4/800/450',
-    category: 'CSS',
-    readTime: '8分钟'
-  },
-  {
-    id: 5,
-    title: 'JavaScript异步编程详解',
-    excerpt: '从回调到Promise再到async/await，JavaScript异步编程的演进历程...',
-    date: '2023-10-18',
-    cover: 'https://picsum.photos/id/5/800/450',
-    category: 'JavaScript',
-    readTime: '10分钟'
-  },
-  {
-    id: 6,
-    title: 'CSS Grid布局完全指南',
-    excerpt: 'CSS Grid是一个强大的布局工具，本文将带你全面了解如何使用它构建复杂布局...',
-    date: '2023-11-22',
-    cover: 'https://picsum.photos/id/6/800/450',
-    category: 'CSS',
-    readTime: '9分钟'
-  }
-])
-
 // 分类列表
-const categories = ref(['全部', '前端开发', 'JavaScript', 'CSS', '动画效果', '工具'])
+const categories = ref(getCategories())
 
 const selectedCategory = ref('全部')
 
 // 根据分类筛选文章
 const filteredArticles = computed(() => {
-  if (selectedCategory.value === '全部') {
-    return articles.value
-  }
-  return articles.value.filter(article => article.category === selectedCategory.value)
+  return getArticlesByCategory(selectedCategory.value)
+})
+
+// 添加事件监听器的函数
+const addCardListeners = () => {
+  const cards = document.querySelectorAll('.article-card')
+  cards.forEach(card => {
+    card.addEventListener('mousemove', e => handleMouseMove(e, card))
+    card.addEventListener('mouseleave', () => handleMouseLeave(card))
+  })
+}
+
+// 监听分类变化并执行动画
+watch(selectedCategory, () => {
+  nextTick(() => {
+    const cards = document.querySelectorAll('.article-card')
+    gsap.fromTo(
+      cards,
+      {
+        opacity: 0,
+        scale: 1,
+        y: 20
+      },
+      {
+        opacity: 1,
+        scale: 1,
+        y: 0,
+        duration: 0.5,
+        stagger: 0.1,
+        ease: 'back.out(1.2)',
+        clearProps: 'all',
+        onComplete: () => {
+          // 动画完成后重新添加事件监听器
+          addCardListeners()
+        }
+      }
+    )
+  })
 })
 
 // 设置动画
@@ -106,6 +83,36 @@ const listMotion = useMotion(articlesList, {
   }
 })
 
+// 处理卡片倾斜效果
+const handleMouseMove = (event, card) => {
+  const rect = card.getBoundingClientRect()
+  const x = event.clientX - rect.left
+  const y = event.clientY - rect.top
+
+  const centerX = rect.width / 2
+  const centerY = rect.height / 2
+
+  const rotateX = -((y - centerY) / 20)
+  const rotateY = (x - centerX) / 20
+
+  // 更新卡片的变换效果
+  const inner = card.querySelector('.article-card-inner')
+  inner.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`
+
+  // 更新渐变光效位置
+  const xPercentage = Math.round((x / rect.width) * 100)
+  const yPercentage = Math.round((y / rect.height) * 100)
+  card.style.setProperty('--x', `${xPercentage}%`)
+  card.style.setProperty('--y', `${yPercentage}%`)
+  card.style.setProperty('--gradient-opacity', '1')
+}
+
+const handleMouseLeave = card => {
+  const inner = card.querySelector('.article-card-inner')
+  inner.style.transform = 'perspective(1000px) rotateX(0) rotateY(0)'
+  card.style.setProperty('--gradient-opacity', '0')
+}
+
 onMounted(() => {
   // 文章卡片动画
   const cards = document.querySelectorAll('.article-card')
@@ -117,7 +124,11 @@ onMounted(() => {
       y: 0,
       duration: 0.6,
       stagger: 0.15,
-      ease: 'power2.out'
+      ease: 'power2.out',
+      onComplete: () => {
+        // 初始加载动画完成后添加事件监听器
+        addCardListeners()
+      }
     }
   )
 })
@@ -137,17 +148,19 @@ onMounted(() => {
     </div>
 
     <div class="articles-container" ref="articlesList">
-      <router-link v-for="article in filteredArticles" :key="article.id" :to="`/articles/${article.id}`" class="article-card">
-        <div class="article-image">
-          <img :src="article.cover" :alt="article.title" />
-          <div class="article-category">{{ article.category }}</div>
-        </div>
-        <div class="article-content">
-          <h2 class="article-title">{{ article.title }}</h2>
-          <p class="article-excerpt">{{ article.excerpt }}</p>
-          <div class="article-meta">
-            <span class="article-date">{{ article.date }}</span>
-            <span class="article-read-time">{{ article.readTime }}阅读</span>
+      <router-link v-for="article in filteredArticles" :key="article.id" :to="`/my_blog/articles/${article.id}`" class="article-card">
+        <div class="article-card-inner">
+          <div class="article-image">
+            <img :src="article.cover" :alt="article.title" />
+            <div class="article-category">{{ article.category }}</div>
+          </div>
+          <div class="article-content">
+            <h2 class="article-title">{{ article.title }}</h2>
+            <p class="article-excerpt">{{ article.excerpt }}</p>
+            <div class="article-meta">
+              <span class="article-date">{{ article.date }}</span>
+              <span class="article-read-time">{{ article.readTime }}阅读</span>
+            </div>
           </div>
         </div>
       </router-link>
@@ -222,19 +235,39 @@ onMounted(() => {
   border-radius: 12px;
   overflow: hidden;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
-  transition:
-    transform 0.3s ease,
-    box-shadow 0.3s ease;
   text-decoration: none;
   color: inherit;
   background-color: white;
   height: 100%;
+  position: relative;
+  --x: 50%;
+  --y: 50%;
+  --gradient-opacity: 0;
+}
+
+.article-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at var(--x) var(--y), rgba(74, 222, 128, 0.2) 0%, rgba(74, 222, 128, 0.1) 10%, transparent 20%);
+  opacity: var(--gradient-opacity);
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.article-card-inner {
+  position: relative;
+  z-index: 2;
+  background: transparent;
+  height: 100%;
   display: flex;
   flex-direction: column;
+  transform-style: preserve-3d;
+  transition: transform 0.3s ease;
 }
 
 .article-card:hover {
-  transform: translateY(-8px);
   box-shadow: 0 15px 30px rgba(0, 0, 0, 0.12);
 }
 

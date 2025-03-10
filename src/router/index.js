@@ -8,32 +8,38 @@ const router = createRouter({
   history: createWebHistory(),
   routes: [
     {
-      path: '/',
+      path: '/my_blog',
       name: 'Home',
       component: Home,
       meta: { transition: 'fade' }
     },
     {
-      path: '/articles',
+      path: '/my_blog/articles',
       name: 'Articles',
       component: Articles,
       meta: { transition: 'slide-left' }
     },
     {
-      path: '/articles/:id',
+      path: '/my_blog/articles/:id',
       name: 'ArticleDetail',
       component: ArticleDetail,
       meta: { transition: 'slide-left' }
     },
     {
-      path: '/about',
+      path: '/my_blog/about',
       name: 'About',
       component: About,
       meta: { transition: 'slide-left' }
     },
     {
+      path: '/my_blog/articles',
+      name: 'Articles',
+      component: Articles,
+      meta: { transition: 'slide-left' }
+    },
+    {
       path: '/:pathMatch(.*)*',
-      name: '/',
+      name: '/my_blog',
       component: Home,
       meta: { transition: 'fade' }
     }

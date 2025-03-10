@@ -22,13 +22,13 @@ function closeMobileMenu() {
     <header class="header">
       <div class="container">
         <div class="header-content">
-          <router-link to="/" class="logo">VIVI小屋</router-link>
+          <router-link to="/my_blog" class="logo">VIVI小屋</router-link>
 
           <!-- 桌面端导航 -->
           <nav class="desktop-nav">
-            <router-link to="/" :class="{ active: currentRouteName === 'Home' }">首页</router-link>
-            <router-link to="/articles" :class="{ active: currentRouteName === 'Articles' }">文章</router-link>
-            <router-link to="/about" :class="{ active: currentRouteName === 'About' }">关于</router-link>
+            <router-link to="/my_blog" :class="{ active: currentRouteName === 'Home' }">首页</router-link>
+            <router-link to="/my_blog/articles" :class="{ active: currentRouteName === 'Articles' }">文章</router-link>
+            <router-link to="/my_blog/about" :class="{ active: currentRouteName === 'About' }">关于</router-link>
           </nav>
 
           <!-- 移动端菜单按钮 -->
@@ -44,9 +44,9 @@ function closeMobileMenu() {
     <!-- 移动端菜单 -->
     <div class="mobile-menu" :class="{ open: isMobileMenuOpen }">
       <nav>
-        <router-link to="/" @click="closeMobileMenu">首页</router-link>
-        <router-link to="/articles" @click="closeMobileMenu">文章</router-link>
-        <router-link to="/about" @click="closeMobileMenu">关于</router-link>
+        <router-link to="/my_blog" @click="closeMobileMenu">首页</router-link>
+        <router-link to="/my_blog/articles" @click="closeMobileMenu">文章</router-link>
+        <router-link to="/my_blog/about" @click="closeMobileMenu">关于</router-link>
       </nav>
     </div>
 

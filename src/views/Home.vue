@@ -143,8 +143,8 @@ onMounted(() => {
         <h1 ref="heroTitle" class="hero-title">热爱 向往</h1>
         <p ref="heroSubtitle" class="hero-subtitle">分享前端开发的心得与体会</p>
         <div class="hero-actions">
-          <router-link to="/articles" class="btn primary">浏览文章</router-link>
-          <router-link to="/about" class="btn secondary">关于我</router-link>
+          <router-link to="/my_blog/articles" class="btn primary">浏览文章</router-link>
+          <router-link to="/my_blog/about" class="btn secondary">关于我</router-link>
         </div>
       </div>
     </section>
@@ -152,7 +152,7 @@ onMounted(() => {
     <section class="latest-posts" ref="latestPosts">
       <h2 class="section-title">最新文章</h2>
       <div class="posts-grid">
-        <router-link v-for="post in posts" :key="post.id" :to="`/articles/${post.id}`" class="post-card">
+        <router-link v-for="post in posts" :key="post.id" :to="`/my_blog/articles/${post.id}`" class="post-card">
           <div class="post-image">
             <img :src="post.cover" :alt="post.title" />
           </div>
@@ -167,7 +167,7 @@ onMounted(() => {
         </router-link>
       </div>
       <div class="view-all">
-        <router-link to="/articles" class="btn outline">查看所有文章</router-link>
+        <router-link to="/my_blog/articles" class="btn outline">查看所有文章</router-link>
       </div>
     </section>
   </div>
