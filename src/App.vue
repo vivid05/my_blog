@@ -403,27 +403,4 @@ main {
     padding: 1rem;
   }
 }
-
-/* 暗色模式支持 */
-@media (prefers-color-scheme: dark) {
-  :root {
-    --text-color: #e1e1e1;
-    --light-text: #a0a0a0;
-    --bg-color: #1a1a1a;
-    --card-bg: #2a2a2a;
-  }
-
-  .header {
-    background-color: rgba(26, 26, 26, 0.8);
-  }
-
-  .mobile-menu {
-    background-color: rgba(26, 26, 26, 0.98);
-  }
-
-  .footer {
-    background-color: #1a1a1a;
-    border-top-color: rgba(255, 255, 255, 0.1);
-  }
-}
 </style>

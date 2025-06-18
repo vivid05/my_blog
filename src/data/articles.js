@@ -19,39 +19,30 @@ export const articles = [
   },
   {
     id: 3,
-    title: 'Vite构建工具的优势',
-    excerpt: 'Vite是一个现代前端构建工具，相比传统工具有哪些优势？本文将为你详细解析...',
+    title: 'Vue3响应式系统的设计与实现',
+    excerpt: 'Vue3的响应式系统是其实现核心之一，本文将带你深入了解其设计与实现...',
     date: '2023-08-10',
     cover: 'https://picsum.photos/id/3/800/450',
-    category: '工具',
-    readTime: '6分钟'
-  },
-  {
-    id: 4,
-    title: '响应式设计最佳实践',
-    excerpt: '如何确保你的网站在各种设备上都能完美展示？本文分享响应式设计的关键技巧...',
-    date: '2023-09-05',
-    cover: 'https://picsum.photos/id/4/800/450',
-    category: 'CSS',
-    readTime: '8分钟'
-  },
-  {
-    id: 5,
-    title: 'JavaScript异步编程详解',
-    excerpt: '从回调到Promise再到async/await，JavaScript异步编程的演进历程...',
-    date: '2023-10-18',
-    cover: 'https://picsum.photos/id/5/800/450',
-    category: 'JavaScript',
+    category: '前端开发',
     readTime: '10分钟'
   },
   {
-    id: 6,
-    title: 'CSS Grid布局完全指南',
-    excerpt: 'CSS Grid是一个强大的布局工具，本文将带你全面了解如何使用它构建复杂布局...',
-    date: '2023-11-22',
-    cover: 'https://picsum.photos/id/6/800/450',
-    category: 'CSS',
-    readTime: '9分钟'
+    id: 4,
+    title: 'HTTP缓存机制',
+    excerpt: 'HTTP缓存机制是前端性能优化中重要的一环，本文将带你深入了解其设计与实现...',
+    date: '2025-06-18',
+    cover: 'https://picsum.photos/id/3/800/450',
+    category: '前端开发',
+    readTime: '5分钟'
+  },
+  {
+    id: 5,
+    title: 'Git 分支合并自动化工具',
+    excerpt: 'Git 分支合并自动化工具，本文将带你深入了解其设计与实现...',
+    date: '2025-06-18',
+    cover: 'https://picsum.photos/id/3/800/450',
+    category: '工具',
+    readTime: '5分钟'
   }
 ]
 

@@ -1,122 +1,9 @@
 <script setup>
 import { ref, onMounted } from 'vue'
-import { useMotion } from '@vueuse/motion'
 import gsap from 'gsap'
 
 const heroTitle = ref(null)
 const heroSubtitle = ref(null)
-const latestPosts = ref(null)
-
-// 示例博客文章数据
-const posts = ref([
-  {
-    id: 1,
-    title: '开始使用Vue3的Composition API',
-    excerpt: 'Vue3的Composition API提供了更灵活的代码组织方式，本文将介绍如何开始使用它...',
-    date: '2023-06-15',
-    cover: 'https://picsum.photos/id/1/800/450'
-  },
-  {
-    id: 2,
-    title: '使用GSAP创建丝滑动画效果',
-    excerpt: 'GSAP是一个强大的JavaScript动画库，可以帮助你创建流畅的网页动画...',
-    date: '2023-07-22',
-    cover: 'https://picsum.photos/id/2/800/450'
-  },
-  {
-    id: 3,
-    title: 'Vite构建工具的优势',
-    excerpt: 'Vite是一个现代前端构建工具，相比传统工具有哪些优势？本文将为你详细解析...',
-    date: '2023-08-10',
-    cover: 'https://picsum.photos/id/3/800/450'
-  },
-  {
-    id: 4,
-    title: 'Vue3的Composition API',
-    excerpt: 'Vue3的Composition API提供了更灵活的代码组织方式，本文将介绍如何开始使用它...',
-    date: '2023-06-15',
-    cover: 'https://picsum.photos/id/4/800/450'
-  },
-  {
-    id: 5,
-    title: 'Vue3的Composition API',
-    excerpt: 'Vue3的Composition API提供了更灵活的代码组织方式，本文将介绍如何开始使用它...',
-    date: '2023-06-15',
-    cover: 'https://picsum.photos/id/4/800/450'
-  },
-  {
-    id: 6,
-    title: 'Vue3的Composition API',
-    excerpt: 'Vue3的Composition API提供了更灵活的代码组织方式，本文将介绍如何开始使用它...',
-    date: '2023-06-15',
-    cover: 'https://picsum.photos/id/4/800/450'
-  },
-  {
-    id: 7,
-    title: 'Vue3的Composition API',
-    excerpt: 'Vue3的Composition API提供了更灵活的代码组织方式，本文将介绍如何开始使用它...',
-    date: '2023-06-15',
-    cover: 'https://picsum.photos/id/4/800/450'
-  },
-  {
-    id: 8,
-    title: 'Vue3的Composition API',
-    excerpt: 'Vue3的Composition API提供了更灵活的代码组织方式，本文将介绍如何开始使用它...',
-    date: '2023-06-15',
-    cover: 'https://picsum.photos/id/4/800/450'
-  },
-  {
-    id: 9,
-    title: 'Vue3的Composition API',
-    excerpt: 'Vue3的Composition API提供了更灵活的代码组织方式，本文将介绍如何开始使用它...',
-    date: '2023-06-15',
-    cover: 'https://picsum.photos/id/4/800/450'
-  }
-])
-
-// 设置动画
-const heroMotion = useMotion(heroTitle, {
-  initial: {
-    opacity: 0,
-    y: 100
-  },
-  enter: {
-    opacity: 1,
-    y: 0,
-    transition: {
-      delay: 200,
-      duration: 800
-    }
-  }
-})
-
-const subtitleMotion = useMotion(heroSubtitle, {
-  initial: {
-    opacity: 0,
-    y: 50
-  },
-  enter: {
-    opacity: 1,
-    y: 0,
-    transition: {
-      delay: 500,
-      duration: 800
-    }
-  }
-})
-
-const postsMotion = useMotion(latestPosts, {
-  initial: {
-    opacity: 0
-  },
-  enter: {
-    opacity: 1,
-    transition: {
-      delay: 800,
-      duration: 1000
-    }
-  }
-})
 
 onMounted(() => {
   // 滚动动画
@@ -146,28 +33,6 @@ onMounted(() => {
           <router-link to="/my_blog/articles" class="btn primary">浏览文章</router-link>
           <router-link to="/my_blog/about" class="btn secondary">关于我</router-link>
         </div>
-      </div>
-    </section>
-
-    <section class="latest-posts" ref="latestPosts">
-      <h2 class="section-title">最新文章</h2>
-      <div class="posts-grid">
-        <router-link v-for="post in posts" :key="post.id" :to="`/my_blog/articles/${post.id}`" class="post-card">
-          <div class="post-image">
-            <img :src="post.cover" :alt="post.title" />
-          </div>
-          <div class="post-content">
-            <h3 class="post-title">{{ post.title }}</h3>
-            <p class="post-excerpt">{{ post.excerpt }}</p>
-            <div class="post-meta">
-              <span class="post-date">{{ post.date }}</span>
-              <span class="read-more">阅读更多 →</span>
-            </div>
-          </div>
-        </router-link>
-      </div>
-      <div class="view-all">
-        <router-link to="/my_blog/articles" class="btn outline">查看所有文章</router-link>
       </div>
     </section>
   </div>

@@ -29,15 +29,6 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --text-color: rgba(255, 255, 255, 0.87);
-    --light-text: #a0a0a0;
-    --bg-color: #242424;
-    --card-bg: #1a1a1a;
-  }
-}
-
 * {
   margin: 0;
   padding: 0;
