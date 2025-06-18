@@ -47,6 +47,8 @@ export default defineConfig({
       allow: ['..']
     }
   },
+  // 确保.md文件被当作静态资源处理
+  publicDir: 'public',
   build: {
     outDir: 'docs', // 将构建输出目录设置为 docs
     emptyOutDir: true, // 构建前清空输出目录
