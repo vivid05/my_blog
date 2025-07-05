@@ -80,7 +80,7 @@ function closeMobileMenu() {
   --bg-color: #f8f9fa;
   --card-bg: #ffffff;
   --header-height: 70px;
-  --transition-speed: 0.3s;
+  --transition-speed: 0.15s;
   --transition-ease: cubic-bezier(0.4, 0, 0.2, 1);
 }
 
