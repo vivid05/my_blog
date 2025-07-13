@@ -44,17 +44,9 @@ const profileDescription = ref(`你好！我是一名深爱前端开发的工程
             <p class="description-text">{{ profileDescription }}</p>
           </div>
           <div class="social-links">
-            <a href="#" class="social-link github">
+            <a href="https://github.com/vivid05" target="_blank" class="social-link github">
               <span class="link-icon">🐱</span>
               <span class="link-text">GitHub</span>
-            </a>
-            <a href="#" class="social-link linkedin">
-              <span class="link-icon">💼</span>
-              <span class="link-text">LinkedIn</span>
-            </a>
-            <a href="#" class="social-link twitter">
-              <span class="link-icon">🐦</span>
-              <span class="link-text">Twitter</span>
             </a>
           </div>
         </div>
