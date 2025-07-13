@@ -3,6 +3,19 @@ import { ref } from 'vue'
 
 const pageTitle = ref(null)
 const aboutContent = ref(null)
+const showToast = ref(false)
+
+const copyEmail = async () => {
+  try {
+    await navigator.clipboard.writeText('wuvivid0505@gmail.com')
+    showToast.value = true
+    setTimeout(() => {
+      showToast.value = false
+    }, 2000)
+  } catch (err) {
+    console.error('复制失败:', err)
+  }
+}
 
 const profileDescription = ref(`你好！我是一名深爱前端开发的工程师，拥有5年的行业经验，专注于打造用户友好、性能卓越的网站和应用程序。我对技术的热情不仅体现在日常工作中，更驱使我不断学习和掌握前沿技术，并将它们巧妙融入项目，显著提升用户体验和网站效率。
 
@@ -45,9 +58,17 @@ const profileDescription = ref(`你好！我是一名深爱前端开发的工程
           </div>
           <div class="social-links">
             <a href="https://github.com/vivid05" target="_blank" class="social-link github">
-              <span class="link-icon">🐱</span>
+              <svg class="link-icon" viewBox="0 0 24 24" fill="currentColor" width="20" height="20">
+                <path d="M12 0C5.374 0 0 5.373 0 12 0 17.302 3.438 21.8 8.207 23.387c.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/>
+              </svg>
               <span class="link-text">GitHub</span>
             </a>
+            <button @click="copyEmail" class="social-link email">
+              <svg class="link-icon" viewBox="0 0 24 24" fill="white" width="20" height="20">
+                <path d="M20 4H4C2.9 4 2 4.9 2 6V18C2 19.1 2.9 20 4 20H20C21.1 20 22 19.1 22 18V6C22 4.9 21.1 4 20 4ZM20 8L12 13L4 8V6L12 11L20 6V8Z"/>
+              </svg>
+              <span class="link-text">Gmail</span>
+            </button>
           </div>
         </div>
       </div>
@@ -95,6 +116,11 @@ const profileDescription = ref(`你好！我是一名深爱前端开发的工程
           </div>
         </div>
       </div>
+    </div>
+    
+    <!-- Toast 提示 -->
+    <div v-if="showToast" class="toast">
+      邮箱地址已复制到剪贴板！
     </div>
   </div>
 </template>
@@ -249,14 +275,11 @@ const profileDescription = ref(`你好！我是一名深爱前端开发的工程
   color: white;
 }
 
-.social-link.linkedin {
-  background: linear-gradient(45deg, #0077b5, #005885);
+.social-link.email {
+  background: linear-gradient(135deg, #ea4335 0%, #fbbc04 35%, #34a853 65%, #4285f4 100%);
   color: white;
-}
-
-.social-link.twitter {
-  background: linear-gradient(45deg, #1da1f2, #0d8bd9);
-  color: white;
+  border: none;
+  cursor: pointer;
 }
 
 .social-link:hover {
@@ -412,6 +435,34 @@ const profileDescription = ref(`你好！我是一名深爱前端开发的工程
   .profile-image {
     width: 200px;
     height: 200px;
+  }
+}
+
+.toast {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  color: white;
+  padding: 1rem 2rem;
+  border-radius: 50px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  z-index: 1000;
+  animation: toastSlideIn 0.3s ease;
+  font-weight: 600;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+@keyframes toastSlideIn {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.8);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
   }
 }
 </style>
